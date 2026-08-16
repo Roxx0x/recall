@@ -1,0 +1,51 @@
+{
+  "name": "ops_agent",
+  "_comment": "A support/ops agent's memory over a few weeks. Some facts were superseded (stale), some are noise that a good memory forgets. Grades relevance AND currency AND forgetting.",
+  "memories": {
+    "m1": "the user is on the enterprise plan",
+    "m2": "the user was on the free plan",
+    "m3": "the payments service runs on postgres 15",
+    "m4": "the payments service was migrated to postgres 16 last week",
+    "m5": "the friday deploy of v2.3 caused a spike in 500 errors",
+    "m6": "v2.3 was rolled back to v2.2, errors cleared in 4 minutes",
+    "m7": "the on-call engineer this week is priya",
+    "m8": "the on-call engineer last week was sam",
+    "m9": "the user prefers terse answers",
+    "m10": "the api rate limit is 1000 requests per minute",
+    "m11": "chatted about the weather being nice",
+    "m12": "the user said good morning",
+    "m13": "acknowledged the ticket",
+    "m14": "the incident postmortem is due friday"
+  },
+  "probes": [
+    {
+      "query": "what plan is the user on",
+      "relevant": ["m1"],
+      "stale": ["m2"]
+    },
+    {
+      "query": "what database does payments use",
+      "relevant": ["m4"],
+      "stale": ["m3"]
+    },
+    {
+      "query": "what happened with the v2.3 deploy",
+      "relevant": ["m5", "m6"],
+      "gains": {"m5": 3, "m6": 2}
+    },
+    {
+      "query": "who is on call",
+      "relevant": ["m7"],
+      "stale": ["m8"]
+    },
+    {
+      "query": "what does the user prefer",
+      "relevant": ["m9"]
+    },
+    {
+      "query": "weather good morning acknowledged the ticket",
+      "relevant": [],
+      "should_forget": ["m11", "m12", "m13"]
+    }
+  ]
+}

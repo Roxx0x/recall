@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "recall-eval"
+version = "0.1.0"
+description = "An evaluation harness for agent memory: recall, staleness, and forgetting metrics."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+keywords = ["agent-memory", "memory-engineering", "evaluation", "benchmark", "retrieval", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+recall = "recall.cli:main"
+
+[project.urls]
+Source = "https://github.com/Roxx0x/recall"
+
+[tool.hatch.build.targets.wheel]
+packages = ["recall"]
